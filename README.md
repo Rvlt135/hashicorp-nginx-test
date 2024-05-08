@@ -1,0 +1,1 @@
+# hashicorp-nginx-test
