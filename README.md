@@ -1,11 +1,14 @@
 # hashicorp-nginx-test
 
-> install nomad + consul:
+install nomad + consul:
+> https://developer.hashicorp.com/consul/install
+> https://developer.hashicorp.com/nomad/install
 
-https://developer.hashicorp.com/consul/install
-https://developer.hashicorp.com/nomad/install
+start nomad agent
+> nomad agent --config nomad_config.hcl
 
-> start nomad agent
+start consul agent:
+> consul agent -dev -config-dir=consul/config.hcl
 
-nomad agent --config nomad_config.hcl
-
+start job nomad nginx:
+> nomad job run nomad/jobs/nginx.nomad.hcl 
