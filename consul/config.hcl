@@ -4,7 +4,7 @@ bootstrap = true
 ui_config {
   enabled = true
 }
-datacenter = "dc1"
+
 data_dir   = "consul/data"
 log_level  = "INFO"
 addresses {
