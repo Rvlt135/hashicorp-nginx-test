@@ -1,0 +1,2 @@
+alive: consul-server.dc1 192.168.1.15:8302
+alive: consul-server.dc1 192.168.1.15:8302
