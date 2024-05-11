@@ -1,26 +1,22 @@
 bind_addr = "0.0.0.0"
-data_dir  = "/tmp/nomad/data"
-datacenter = "nomad_1"
+data_dir  = "/tmp/nomad"
 
 advertise {
-  http = "127.0.0.1"
-  rpc = "127.0.0.1"
-  serf = "127.0.0.1"
+  http = "192.168.1.15"
+  rpc = "192.168.1.15"
+  serf = "192.168.1.15"
 }
 
 server {
   enabled = true
-  bootstrap_expect = 3
+  bootstrap_expect = 1
 }
 
 client {
   enabled = true
   servers = ["127.0.0.1"]
-}
-
-plugin "raw_exec" {
-  config {
-    enabled = true
+  options = {
+    "driver.raw_exec.enable" = "1"
   }
 }
 
