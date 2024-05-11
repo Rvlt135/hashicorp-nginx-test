@@ -13,6 +13,42 @@ start consul agent:
 start job nomad nginx:
 > nomad job run nomad/jobs/nginx.nomad.hcl
 
+If you need two node local: 
+Add docker container 
+```
+docker run -d \
+  --name nomad \
+  --net host \
+  --user nomad \
+  -e NOMAD_DISABLE_PERM_MGMT=true \
+  -e NOMAD_LOCAL_CONFIG='
+server {
+  enabled = true
+  bootstrap_expect = 3
+}
+
+datacenter = "dc1"
+name = "dc2"
+
+data_dir = "/tmp/nomad/data"
+
+bind_addr = "0.0.0.0"
+
+advertise {
+  http = "{{ GetPrivateIP }}"
+  rpc  = "{{ GetPrivateIP }}"
+  serf = "{{ GetPrivateIP }}"
+}
+consul {
+	  address = "host.docker.internal:8500"
+	  server_service_name = "nomad"
+	  client_service_name = "nomad-client"
+	}
+' \
+  -v "nomad:/nomad/data:rw" \
+  multani/nomad agent
+```
+
 Nomad:
 <img width="960" alt="image" src="https://github.com/Rvlt135/hashicorp-nginx-test/assets/41593525/f535614a-6dd2-48de-890a-84709b18ec25">
 
